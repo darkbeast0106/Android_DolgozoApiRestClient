@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/inputs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+        <EditText
+            android:id="@+id/editID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ID"
+            android:inputType="number"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/editNev"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Név" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nem: "
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radioFerfi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Férfi" />
+
+            <RadioButton
+                android:id="@+id/radioNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nő" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/editKor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Kor"
+            android:inputType="number"
+            android:maxLength="3" />
+
+        <EditText
+            android:id="@+id/editFizetes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fizetés"
+            android:inputType="number"
+            android:maxLength="6"
+            />
+
+        <Button
+            android:id="@+id/btnFelvesz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Felvesz" />
+
+        <Button
+            android:id="@+id/btnModosit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Módosít" />
+
+
+        <Button
+            android:id="@+id/btnMegse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mégse" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnFelvetelre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Új felvétele" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textHiba"
+        android:textColor="#FF0000"
+        android:scrollbars="vertical"
+        />
+
+    <ListView
+        android:id="@+id/adatok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/dolgozo_list_item"
+        />
+
+</LinearLayout>
