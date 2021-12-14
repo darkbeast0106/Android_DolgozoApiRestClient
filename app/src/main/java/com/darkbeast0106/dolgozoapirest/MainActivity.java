@@ -180,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case POST:
                 dolgozoList.addAll(0, adatok);
+                inputokAlaphelyzetbe();
                 break;
             case PUT:
                 Dolgozo dolgozoPut = adatok.get(0);
@@ -188,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
                 regi.setNem(dolgozoPut.getNem());
                 regi.setKor(dolgozoPut.getKor());
                 regi.setFizetes(dolgozoPut.getFizetes());
+                inputokAlaphelyzetbe();
                 break;
             case DELETE:
                 int id = Integer.parseInt(params);
@@ -224,6 +226,17 @@ public class MainActivity extends AppCompatActivity {
         listeners();
         dolgozokListazasa();
     }
+    private void inputokAlaphelyzetbe() {
+        btnFelvetelre.setVisibility(View.VISIBLE);
+        btnFelvesz.setVisibility(View.GONE);
+        btnModosit.setVisibility(View.GONE);
+        inputs.setVisibility(View.GONE);
+        editID.setText("");
+        editNev.setText("");
+        editKor.setText("");
+        editFizetes.setText("");
+        radioFerfi.setChecked(true);
+    }
 
     private void listeners() {
         textHiba.setMovementMethod(new ScrollingMovementMethod());
@@ -235,10 +248,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnMegse.setOnClickListener(v -> {
-            btnFelvetelre.setVisibility(View.VISIBLE);
-            btnModosit.setVisibility(View.GONE);
-            inputs.setVisibility(View.GONE);
-            btnFelvesz.setVisibility(View.GONE);
+            inputokAlaphelyzetbe();
         });
 
         btnFelvesz.setOnClickListener(v -> {
