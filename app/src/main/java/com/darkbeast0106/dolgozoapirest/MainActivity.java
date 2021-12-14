@@ -3,6 +3,7 @@ package com.darkbeast0106.dolgozoapirest;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -30,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressLint({"DefaultLocale", "StaticFieldLeak"})
 public class MainActivity extends AppCompatActivity {
 
     private class RequestTask extends AsyncTask<Void, Void, Response>{
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     default:
                         Toast.makeText(MainActivity.this, r.getResponseCode()+ " "+ valasz.getMessage(), Toast.LENGTH_SHORT).show();
-                        textHiba.setText(r.getResponseCode()+" "+ valasz.getMessage());
+                        textHiba.setText(String.format("%d-s hiba: %s",r.getResponseCode(), valasz.getMessage()));
                         break;
                 }
             }
@@ -215,7 +217,6 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton radioNo;
     private ProgressBar progressBar;
     private List<Dolgozo> dolgozoList;
-    private final String BASE_URL = "http://darkbeast0106.ddns.net/api/dolgozo";
     //endregion fields
 
     @Override
@@ -256,7 +257,8 @@ public class MainActivity extends AppCompatActivity {
                 Dolgozo d = createFromInput();
                 Gson converter = new Gson();
                 String json = converter.toJson(d);
-                RequestTask task = new RequestTask(BASE_URL, json, RequestType.POST);
+                String url = ApiUrls.DolgozoUrls.POST;
+                RequestTask task = new RequestTask(url, json, RequestType.POST);
                 task.execute();
             } catch (Exception e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -270,7 +272,8 @@ public class MainActivity extends AppCompatActivity {
                 d.setId(Integer.parseInt(id));
                 Gson converter = new Gson();
                 String json = converter.toJson(d);
-                RequestTask task = new RequestTask(BASE_URL+"/"+id, json, RequestType.PUT);
+                String url = String.format(ApiUrls.DolgozoUrls.PUT, id);
+                RequestTask task = new RequestTask(url, json, RequestType.PUT);
                 task.execute();
             } catch (Exception e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -312,13 +315,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void dolgozoTorlese(int id) {
         String json = String.valueOf(id);
-        RequestTask task = new RequestTask(BASE_URL+"/"+id, json, RequestType.DELETE);
+        String url = String.format(ApiUrls.DolgozoUrls.DELETE, id);
+        RequestTask task = new RequestTask(url, json, RequestType.DELETE);
         task.execute();
     }
 
     private void dolgozokListazasa(){
         String json = "";
-        RequestTask task = new RequestTask(BASE_URL, json, RequestType.GET);
+        String url = ApiUrls.DolgozoUrls.GET_ALL;
+        RequestTask task = new RequestTask(url, json, RequestType.GET);
         task.execute();
     }
 
